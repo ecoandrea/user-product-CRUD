@@ -12,10 +12,21 @@ export const createFile = async(data, pathData) => {
         
         await fs.mkdir(path.dirname(datafilePath) , { recursive: true })
 
-        await fs.writeFile(datafilePath, JSON.stringify(data, null, 4), 'urf8', (err) => {
-            throw new Error(`Error al crear al archivo: ${err}`);
-        });
+        await fs.writeFile(datafilePath, JSON.stringify(data, null, 4), 'utf8');
     } catch (error) {
         throw new Error(`Error al crear o guardar el archivo ${error}`)
+    }
+}
+
+
+export const readFile = async (pathData) => {
+    try {
+        const datafilePath = path.join(__dirname, `../data/${pathData}`)
+
+        const data = await fs.readFile(datafilePath, 'utf8')
+        return JSON.parse(data)
+    } catch (error) {
+        console.error(`No pudemos leer el archivo: ${error}` )
+        return null
     }
 }

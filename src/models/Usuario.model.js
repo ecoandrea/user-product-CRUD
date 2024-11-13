@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { createDataFile } from "../utils/fileUtils.js";
 
 export class Usuario {
   #id;
@@ -72,6 +73,20 @@ export class Usuario {
         email: this.#email,
         rol: this.#rol,
         active: this.#active
+    }
+  }
+
+  static async crear(data) {
+    try {
+      const { name, lastname, email, rol } = data
+      const usuario = new Usuario(name, lastname, email, rol)
+      const usuarioObject = usuario.getAllProperties()
+  
+      await createDataFile(usuarioObject, 'usuarios.json')
+  
+      return usuarioObject
+    } catch (error) {
+      throw new Error(`Fallo al crear un nuevo usuario, Error: ${error}`)
     }
   }
 
