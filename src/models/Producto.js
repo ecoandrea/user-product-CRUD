@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-class Product {
+export class Product {
     #id
     #name
     #description
@@ -66,7 +66,7 @@ class Product {
         }
     }
 
-    
+
 
 
 }
