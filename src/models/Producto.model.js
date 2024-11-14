@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
+import { createDataFile } from '../utils/fileUtils.js';
 
-export class Product {
+export class Producto {
     #id
     #name
     #description
@@ -9,11 +10,12 @@ export class Product {
     #visible
 
     constructor(name, description, price, stock) {
+        this.#id = uuidv4()
         this.#name = name;
         this.#description = description;
         this.#price = price;
         this.#stock = stock;
-        this.#visible = true
+        this.#visible = stock > 0
     }
 
     get id() {
@@ -62,11 +64,24 @@ export class Product {
             description: this.#description,
             price: this.#price,
             stock: this.#stock,
-            active: this.#visible
+            visible: this.#visible
         }
     }
 
 
+    static async crear(data) {
+        try {
+            const { name, description, price, stock } = data;
+            const product = new Producto(name, description, price, stock);
+            const productObject = product.getAllProperties();
 
+            await createDataFile(productObject, 'producto.json');
+
+            return productObject;
+        } catch (error) {
+            throw new Error(`Error al crear un producto ERROR: ${error}`)
+            
+        }
+    }
 
 }
