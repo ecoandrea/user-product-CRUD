@@ -13,3 +13,13 @@ export const createDataFile = async (data, dataPath) => {
         throw new Error(`Error al gestionar la creación del archivo con la data. ERROR: ${error}`)
     }
 }
+
+
+export const getAllData = async(pathData) => {
+    try {
+        const data = await readFile(pathData)
+        return data
+    } catch (error) {
+        throw new Error('No pudimos acceder a los datos')
+    }
+}

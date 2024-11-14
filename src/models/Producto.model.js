@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createDataFile } from '../utils/fileUtils.js';
+import { createDataFile, getAllData } from '../utils/fileUtils.js';
 
 export class Producto {
     #id
@@ -81,6 +81,15 @@ export class Producto {
         } catch (error) {
             throw new Error(`Error al crear un producto ERROR: ${error}`)
             
+        }
+    }
+
+    static async encontrarTodos() {
+        try {
+            const productos = await getAllData('productos.json')
+            return productos
+        } catch (error) {
+            throw new Error("Error al obtener los datos de los productos");
         }
     }
 
