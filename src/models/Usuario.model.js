@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { createDataFile, getAllData } from "../utils/fileUtils.js";
+import { createDataFile, getAllData, getDataById } from "../utils/fileUtils.js";
 
 
 export class Usuario {
@@ -97,6 +97,15 @@ export class Usuario {
       return usuarios
     } catch (error) {
       throw new Error('Error al obtener los datos del usuario')
+    }
+  }
+
+  static async encontrarPorId(id) {
+    try {
+      const usuario = await getDataById(id, 'usuarios.json')
+      return usuario
+    } catch (error) {
+      throw new Error("Error al obtener los datos del usuario");
     }
   }
 }

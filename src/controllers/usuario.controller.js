@@ -38,3 +38,23 @@ export const obtenerTodosLosUsuarios = async(req, res) => {
         });
     }
 }
+
+
+export const obtenerUsuarioPorId = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await Usuario.encontrarPorId(id);
+
+        res.status(200).json({
+            messsage: 'Usuario Encontrado',
+            status: 200,
+            data
+        })
+    } catch (error) {
+         res.status(500).json({
+           message: "Error al obtener el usuario",
+           status: 500,
+           error,
+         });
+    }
+}

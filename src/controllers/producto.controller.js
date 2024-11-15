@@ -24,6 +24,7 @@ export const obtenerTodosLosProductos = async(req, res) => {
     try {
         const data = await Producto.encontrarTodos();
         if (!data) throw new Error("No existen los datos");
+        
         res.status(200).json({
             message: 'Productos Encontrados!',
             status: 200,
