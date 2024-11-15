@@ -75,7 +75,7 @@ export class Producto {
             const product = new Producto(name, description, price, stock);
             const productObject = product.getAllProperties();
 
-            await createDataFile(productObject, 'producto.json');
+            await createDataFile(productObject, 'productos.json');
 
             return productObject;
         } catch (error) {

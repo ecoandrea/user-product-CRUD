@@ -14,5 +14,21 @@
         "email": "Carithoxxx__@gmail.com",
         "rol": "full stack dev Sr",
         "active": true
+    },
+    {
+        "id": "2cb48e17-3775-4c10-9ee7-51d96228a125",
+        "name": "Manuel",
+        "lastname": "Lobos",
+        "email": "Manolithox__bellakoxxx@gmail.com",
+        "rol": "tech lead",
+        "active": true
+    },
+    {
+        "id": "a959b225-732a-4965-ad06-31ff8794f07f",
+        "name": "David",
+        "lastname": "Catalan",
+        "email": "The_Davidszzzzz@gmail.com",
+        "rol": "Product Owner",
+        "active": true
     }
 ]

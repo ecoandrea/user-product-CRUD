@@ -8,7 +8,7 @@ export const crearNuevoProducto = async(req, res) => {
         res.status(201).json({
             message: 'Producto creado con éxito',
             status: 201,
-            producto
+            data: producto
         })
     } catch (error) {
         res.status(500).json({
