@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createDataFile, getAllData } from '../utils/fileUtils.js';
+import { createDataFile, getAllData, getDataById } from '../utils/fileUtils.js';
 
 export class Producto {
     #id
@@ -93,4 +93,12 @@ export class Producto {
         }
     }
 
+    static async encontrarPorId(id) {
+        try {
+            const producto = await getDataById(id, 'productos.json');
+            return producto
+        } catch (error) {
+            throw new Error("Error al obtener los datos del producto");
+        }
+    }
 }

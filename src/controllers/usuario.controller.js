@@ -45,6 +45,8 @@ export const obtenerUsuarioPorId = async(req, res) => {
         const { id } = req.params;
         const data = await Usuario.encontrarPorId(id);
 
+        if (!data) throw new Error("La data se encuentra vacía");
+
         res.status(200).json({
             messsage: 'Usuario Encontrado',
             status: 200,

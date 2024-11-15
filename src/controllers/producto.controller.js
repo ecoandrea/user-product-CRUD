@@ -24,7 +24,7 @@ export const obtenerTodosLosProductos = async(req, res) => {
     try {
         const data = await Producto.encontrarTodos();
         if (!data) throw new Error("No existen los datos");
-        
+
         res.status(200).json({
             message: 'Productos Encontrados!',
             status: 200,
@@ -36,5 +36,27 @@ export const obtenerTodosLosProductos = async(req, res) => {
             status: 500,
             error
         })
+    }
+}
+
+
+export const obtenerProductoPorId = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await Producto.encontrarPorId(id);
+
+        if(!data) throw new Error('La data se encuentra vacía')
+
+        res.status(200).json({
+            message: 'Producto encontrado',
+            status: 200,
+            data
+        })
+    } catch (error) {
+        res.status(500).json({
+          message: "Error al obtener el producto",
+          status: 500,
+          error,
+        });
     }
 }
