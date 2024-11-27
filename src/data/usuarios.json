@@ -30,5 +30,13 @@
         "email": "The_Davidszzzzz@gmail.com",
         "rol": "Product Owner",
         "active": true
+    },
+    {
+        "id": "bf9aba73-ac1c-4ef6-9cdd-c98f120e3505",
+        "name": "Alfonso",
+        "lastname": "Lobos",
+        "email": "Manolithox__bellakoxxx@gmail.com",
+        "rol": "tech lead",
+        "active": true
     }
 ]

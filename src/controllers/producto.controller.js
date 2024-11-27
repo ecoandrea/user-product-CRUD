@@ -60,3 +60,46 @@ export const obtenerProductoPorId = async(req, res) => {
         });
     }
 }
+
+
+export const actualizarProducto = async(req, res) => {
+    try {
+        const { id } = req.params
+        const data = req.body
+
+        const actualizarProducto = await Producto.actualizar(id, data)
+
+        res.status(201).json({
+            message: 'Producto Actualizado',
+            status: 201,
+            oldData: actualizarProducto,
+            newData: data
+        })
+    } catch (error) {
+        res.status(500).json({
+          message: "Error al actualizar el producto",
+          status: 500,
+          error,
+        });
+    }
+}
+
+export const eliminarPermanenteProducto = async(req, res) => {
+    try {
+        const { id } = req.params;
+
+        const productoBorrar = await Producto.eliminarTheReal(id);
+
+        res.status(200).json({
+            message: 'Producto eliminado',
+            status: 200,
+            dataDeleted: productoBorrar
+        })
+    } catch (error) {
+        res.status(500).json({
+          message: "Error al Eliminar el producto",
+          status: 500,
+          error,
+        });
+    }
+}

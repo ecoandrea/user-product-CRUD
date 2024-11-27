@@ -1,5 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
-import { createDataFile, getAllData, getDataById } from '../utils/fileUtils.js';
+import { 
+    createDataFile, 
+    getAllData, 
+    getDataById, 
+    permaDeleteData, 
+    updateData 
+} from '../utils/fileUtils.js';
+import { Validate } from '../utils/Validaciones.js';
 
 export class Producto {
     #id
@@ -11,10 +18,10 @@ export class Producto {
 
     constructor(name, description, price, stock) {
         this.#id = uuidv4()
-        this.#name = name;
-        this.#description = description;
-        this.#price = price;
-        this.#stock = stock;
+        this.#name = Validate.productText(name, "Nombre");
+        this.#description = Validate.userName(description, "Descripción");
+        this.#price = Validate.amount(price, 'Precio');
+        this.#stock = Validate.amount(stock, 'Stock');
         this.#visible = stock > 0
     }
 
@@ -39,22 +46,39 @@ export class Producto {
     }
 
     setName(newName) {
-        //validar
-        this.#name = newName
+        try {
+          Validate.userName(newName, "Nombre");
+          this.#name = newName;
+        } catch (error) {
+          console.error(error);
+        }
     }
 
     setDescription(newDescription) {
-        //validar
-        this.#description = newDescription
+        try {
+          Validate.userName(newDescription, "Descripción");
+          this.#name = newName;
+        } catch (error) {
+          console.error(error);
+        }
     }
 
     setPrice(newPrice) {
-        //validar
-        this.#price = newPrice
+        try {
+          Validate.amount(newPrice, "Precio");
+          this.#price = newPrice;
+        } catch (error) {
+          console.error(error);
+        }
     }
 
     setStock(newStock) {
-        this.#stock = newStock
+        try {
+          Validate.amount(newStock, "Stock");
+          this.#stock = newStock;
+        } catch (error) {
+          console.error(error);
+        }    
     }
 
     getAllProperties() {
@@ -100,5 +124,26 @@ export class Producto {
         } catch (error) {
             throw new Error("Error al obtener los datos del producto");
         }
+    }
+
+    static async actualizar(id, data) {
+        try {
+            const actualizarProducto = await updateData(id, data, 'productos.json')
+            return actualizarProducto
+        } catch (error) {
+            console.error(`Fallo al actualizar el producto, Error: ${error}`);
+        } 
+    }
+
+    static async eliminarTheReal(id) {
+        try {
+            const productoBorrar = await permaDeleteData(id, 'productos.json');
+            return productoBorrar
+        } catch (error) {
+            throw new Error(
+              `Fallo al eliminar permanente el producto, Error: ${error}`
+            );
+        }
+
     }
 }
